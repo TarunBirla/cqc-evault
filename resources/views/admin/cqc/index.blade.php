@@ -4,10 +4,7 @@
 
 <h4>CQC E-Vault</h4>
 
-<!-- CREATE FOLDER BUTTON -->
-<a href="{{ url('cqc-vault/folder/create') }}" class="btn btn-primary mb-3">
-Create New Folder
-</a>
+
 
 <!-- FOLDERS -->
 <div class="row">
