@@ -41,13 +41,13 @@
                             </label>
                             <input type="text" 
                                    name="name" 
-                                   class="form-control form-control-lg"
+                                   class="form-control form-control"
                                    placeholder="Enter folder name"
                                    required
                                    autofocus>
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-lg w-100 shadow-sm">
+                        <button type="submit" class="btn btn-primary btn-sm w-100 shadow-sm">
                             <i class="bi bi-plus-circle me-2"></i>
                             Create Folder
                         </button>
