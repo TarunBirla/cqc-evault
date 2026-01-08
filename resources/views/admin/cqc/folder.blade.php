@@ -62,7 +62,7 @@
                             @csrf
                             <div id="subfolderInputs">
                                 <div class="mb-2 subfolder-input">
-                                    <input type="text" name="names[]" class="form-control form-control-lg" 
+                                    <input type="text" name="names[]" class="form-control form-control" 
                                            placeholder="Subfolder name" required>
                                 </div>
                             </div>
@@ -187,7 +187,7 @@
                                     <i class="bi bi-tag-fill text-muted me-1"></i>
                                     Document Title
                                 </label>
-                                <input type="text" class="form-control form-control-sm" 
+                                <input type="text" class="form-control form-control" 
                                        name="title" 
                                        placeholder="Enter document title" 
                                        required>
@@ -198,13 +198,13 @@
                                     <i class="bi bi-paperclip text-muted me-1"></i>
                                     Choose File
                                 </label>
-                                <input type="file" class="form-control form-control-sm" 
+                                <input type="file" class="form-control form-control" 
                                        name="file" 
                                        required>
                             </div>
 
                             <div class="col-12">
-                                <button type="submit" class="btn btn-success btn-sm">
+                                <button type="submit" class="btn btn-sm btn-primary">
                                     <i class="bi bi-upload me-2"></i>
                                     Upload Document
                                 </button>
