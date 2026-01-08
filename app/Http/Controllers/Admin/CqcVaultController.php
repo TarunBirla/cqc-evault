@@ -67,41 +67,26 @@ public function upload(Request $request)
 
 
 
-
     public function history($id)
     {
         $history = DocumentHistory::where('document_id',$id)->get();
         return response()->json($history);
     }
 
-// Show page to create folder/subfolder
-public function createFolderPage()
-{
-    $folders = Folder::whereNull('parent_id')->get(); // top-level folders
-    return view('admin.cqc.create-folder', compact('folders'));
-}
-
-// Create folder/subfolder
-public function createFolder(Request $request)
+ public function createFolder(Request $request)
 {
     $request->validate([
-        'names' => 'required|array',
-        'names.*' => 'required|string|max:255',
-        'parent_id' => 'nullable|exists:folders,id'
+        'name' => 'required|string|max:255',
     ]);
 
-    foreach ($request->names as $name) {
-        Folder::create([
-            'name' => $name,
-            'parent_id' => $request->parent_id ?: null,
-            'year' => null
-        ]);
-    }
+    Folder::create([
+        'name'      => $request->name,
+        'parent_id' => $request->parent_id ?: null,
+        'year'      => $request->year ?: null
+    ]);
 
-    return back()->with('success','Folder(s) created successfully');
+    return back()->with('success','Folder created successfully');
 }
-
-
 
 
 }
