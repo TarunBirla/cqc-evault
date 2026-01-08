@@ -20,6 +20,12 @@ Route::post('cqc-vault/upload', [CqcVaultController::class,'upload']);
 // Document history
 Route::get('cqc-vault/history/{id}', [CqcVaultController::class,'history']);
 
+// Add multiple subfolders
+Route::post('cqc-vault/folder/{id}/subfolders', [CqcVaultController::class,'addSubfolders']);
+
+// Delete a folder
+Route::delete('cqc-vault/folder/{id}', [CqcVaultController::class,'dFolder']);
+Route::delete('cqc-vault/folder/{id}', [CqcVaultController::class,'deleteFolder']);
 
 
 

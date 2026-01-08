@@ -87,6 +87,56 @@ public function upload(Request $request)
 
     return back()->with('success','Folder created successfully');
 }
+// Add multiple subfolders under current folder
+public function addSubfolders(Request $request, $folderId)
+{
+    $request->validate([
+        'names' => 'required|array',
+        'names.*' => 'required|string|max:255',
+    ]);
+
+    foreach ($request->names as $name) {
+        Folder::create([
+            'name' => $name,
+            'parent_id' => $folderId,
+        ]);
+    }
+
+    return back()->with('success', 'Subfolder(s) created successfully');
+}
+
+// Delete a folder (and optionally its subfolders and documents)
+public function dFolder($id)
+{
+    $folder = Folder::findOrFail($id);
+
+    // Optional: delete subfolders recursively
+    foreach($folder->children as $child) {
+        $child->delete();
+    }
+
+    // Optional: delete documents inside
+    foreach($folder->documents as $doc) {
+        if(file_exists(public_path($doc->file_path))) {
+            unlink(public_path($doc->file_path));
+        }
+        $doc->delete();
+    }
+
+    $folder->delete();
+
+    return back()->with('success', 'Folder deleted successfully');
+}
+
+
+// Delete a subfolder
+public function deleteFolder($id)
+{
+    $folder = Folder::findOrFail($id);
+    $folder->delete(); // optionally delete documents inside if needed
+
+    return back()->with('success', 'Folder deleted successfully');
+}
 
 
 }

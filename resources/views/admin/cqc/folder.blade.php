@@ -7,19 +7,40 @@
 <div class="row">
 
 <!-- LEFT SIDEBAR: Subfolders -->
+<!-- LEFT SIDEBAR: Subfolders -->
 <div class="col-md-3">
 <div class="card shadow-sm">
 <div class="card-header fw-bold">{{ $folder->name }}</div>
-<ul class="list-group list-group-flush">
+
+<!-- Existing Subfolders -->
+<ul class="list-group list-group-flush mb-2">
 @foreach($folder->children as $child)
-<li class="list-group-item d-flex justify-content-between">
+<li class="list-group-item d-flex justify-content-between align-items-center">
     <a href="{{ url('cqc-vault/folder/'.$child->id) }}">{{ $child->name }}</a>
-    <i class="bi bi-folder-fill text-warning"></i>
+    <form method="POST" action="{{ url('cqc-vault/folder/'.$child->id) }}" onsubmit="return confirm('Delete this folder?')">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+    </form>
 </li>
 @endforeach
 </ul>
+
+<!-- Add Multiple Subfolders -->
+<h6 class="px-3">Add Subfolders</h6>
+<form method="POST" action="{{ url('cqc-vault/folder/'.$folder->id.'/subfolders') }}">
+    @csrf
+    <div id="subfolderInputs">
+        <div class="mb-2 d-flex">
+            <input type="text" name="names[]" class="form-control me-2" placeholder="Subfolder Name" required>
+        </div>
+    </div>
+    <button type="button" class="btn btn-secondary mb-2 w-100" id="addSubfolderInput">+ Add Another</button>
+    <button class="btn btn-success w-100">Create Subfolder(s)</button>
+</form>
 </div>
 </div>
+
 
 <!-- RIGHT CONTENT: Documents -->
 <div class="col-md-9">
@@ -97,5 +118,16 @@ $('#historyModal').modal('show');
 });
 });
 </script>
+
+<script>
+$('#addSubfolderInput').click(function() {
+    $('#subfolderInputs').append(`
+        <div class="mb-2 d-flex">
+            <input type="text" name="names[]" class="form-control me-2" placeholder="Subfolder Name" required>
+        </div>
+    `);
+});
+</script>
+
 
 @endsection
