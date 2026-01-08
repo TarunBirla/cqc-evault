@@ -26,13 +26,15 @@ class CqcVaultController extends Controller
    public function upload(Request $request)
 {
 
-    dd($request->all(), $request->file('file'));
     $request->validate([
         'title' => 'required',
         'file'  => 'required|file|max:10240'
     ]);
 
-    $path = $request->file('file')->store('cqc', 'public');
+    $file = $request->file('file');
+$filename = time().'_'.$file->getClientOriginalName();
+$path = $file->storeAs('cqc', $filename, 'public');
+
 
     $doc = Document::create([
         'folder_id'   => $request->folder_id,
