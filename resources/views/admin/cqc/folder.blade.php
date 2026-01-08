@@ -18,72 +18,71 @@
     <div class="row g-4">
 
         <!-- LEFT SIDEBAR: Subfolders -->
-       @if($folder->parent_id === null)
-<div class="col-lg-5 col-md-4">
+            <div class="col-lg-5 col-md-4">
+                <div class="card shadow-sm border-0 sticky-top" style="top: 20px;">
+                    <div class="card-header bg-gradient text-white" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <h6 class="mb-0 fw-semibold">
+                            <i class="bi bi-folder2 me-2"></i>
+                            Subfolders
+                        </h6>
+                    </div>
 
-            <div class="card shadow-sm border-0 sticky-top" style="top: 20px;">
-                <div class="card-header bg-gradient text-white" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                    <h6 class="mb-0 fw-semibold">
-                        <i class="bi bi-folder2 me-2"></i>
-                        Subfolders
-                    </h6>
-                </div>
+                    <div class="card-body p-0">
+                        <!-- Existing Subfolders -->
+                        @if($folder->children->count() > 0)
+                        <ul class="list-group list-group-flush">
+                            @foreach($folder->children as $child)
+                            <li class="list-group-item d-flex justify-content-between align-items-center hover-item">
+                                <a href="{{ url('cqc-vault/folder/'.$child->id) }}" class="text-decoration-none text-dark flex-grow-1">
+                                    <i class="bi bi-folder-fill text-warning me-2"></i>
+                                    <span class="fw-semibold">{{ $child->name }}</span>
+                                </a>
+                                <form method="POST" action="{{ url('cqc-vault/folder/'.$child->id) }}"
+                                    onsubmit="return confirm('Delete this subfolder?')" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </li>
+                            @endforeach
+                        </ul>
+                        @endif
 
-                <div class="card-body p-0">
-                    <!-- Existing Subfolders -->
-                    @if($folder->children->count() > 0)
-                    <ul class="list-group list-group-flush">
-                        @foreach($folder->children as $child)
-                        <li class="list-group-item d-flex justify-content-between align-items-center hover-item">
-                            <a href="{{ url('cqc-vault/folder/'.$child->id) }}" class="text-decoration-none text-dark flex-grow-1">
-                                <i class="bi bi-folder-fill text-warning me-2"></i>
-                                <span class="fw-semibold">{{ $child->name }}</span>
-                            </a>
-                            <form method="POST" action="{{ url('cqc-vault/folder/'.$child->id) }}" 
-                                  onsubmit="return confirm('Delete this subfolder?')" class="d-inline">
+                        <!-- Add Multiple Subfolders -->
+
+                        <div class="p-3 border-top bg-light">
+                            <h6 class="fw-semibold mb-3">
+                                <i class="bi bi-plus-circle text-primary me-1"></i>
+                                Add Subfolder
+                            </h6>
+
+                            <form method="POST" action="{{ url('cqc-vault/folder/'.$folder->id.'/subfolders') }}">
                                 @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-outline-danger">
-                                    <i class="bi bi-trash"></i>
+                                <div id="subfolderInputs">
+                                    <div class="mb-2 subfolder-input">
+                                        <input type="text" name="names[]" class="form-control"
+                                            placeholder="Subfolder name" required>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-sm btn-outline-secondary w-100 mb-2" id="addSubfolderInput">
+                                    + Add Another
+                                </button>
+
+                                <button type="submit" class="btn btn-sm btn-primary w-100">
+                                    Create Subfolder(s)
                                 </button>
                             </form>
-                        </li>
-                        @endforeach
-                    </ul>
-                    @endif
-
-                    <!-- Add Multiple Subfolders -->
-                    @if($folder->parent_id === null)
-                    <div class="p-3 border-top bg-light">
-                        <h6 class="fw-semibold mb-3">
-                            <i class="bi bi-plus-circle text-primary me-1"></i>
-                            Add Subfolders
-                        </h6>
-                        <form method="POST" action="{{ url('cqc-vault/folder/'.$folder->id.'/subfolders') }}">
-                            @csrf
-                            <div id="subfolderInputs">
-                                <div class="mb-2 subfolder-input">
-                                    <input type="text" name="names[]" class="form-control form-control" 
-                                           placeholder="Subfolder name" required>
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-sm btn-outline-secondary w-100 mb-2" id="addSubfolderInput">
-                                <i class="bi bi-plus me-1"></i>Add Another
-                            </button>
-                            <button type="submit" class="btn btn-sm btn-primary w-100">
-                                <i class="bi bi-check-circle me-1"></i>Create Subfolder(s)
-                            </button>
-                        </form>
+                        </div>
                     </div>
-                    @endif
                 </div>
             </div>
-        </div>
-@endif
         <!-- RIGHT CONTENT: Documents -->
-       <div class="{{ $folder->parent_id === null ? 'col-lg-7 col-md-8' : 'col-12' }}">
+        <div class="col-lg-7 col-md-8'}}">
 
-            
+
             <!-- Documents Card -->
             <div class="card shadow-sm border-0 mb-4">
                 <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center">
@@ -124,7 +123,7 @@
                                     </td>
 
                                     <td class="text-center px-3">
-                                        <a href="{{ asset($doc->file_path) }}" target="_blank" 
+                                        <a href="{{ asset($doc->file_path) }}" target="_blank"
                                            class="btn btn-sm btn-outline-primary"
                                            title="View Document">
                                             <i class="bi bi-eye"></i>
@@ -132,7 +131,7 @@
                                     </td>
 
                                     <td class="text-center px-3">
-                                        <button class="btn btn-sm btn-outline-info history-btn" 
+                                        <button class="btn btn-sm btn-outline-info history-btn"
                                                 data-id="{{ $doc->id }}"
                                                 title="View History">
                                             <i class="bi bi-clock-history"></i>
@@ -182,16 +181,16 @@
                     <form method="POST" enctype="multipart/form-data" action="{{ url('cqc-vault/upload') }}">
                         @csrf
                         <input type="hidden" name="folder_id" value="{{ $folder->id }}">
-                        
+
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label fw-semibold">
                                     <i class="bi bi-tag-fill text-muted me-1"></i>
                                     Document Title
                                 </label>
-                                <input type="text" class="form-control form-control" 
-                                       name="title" 
-                                       placeholder="Enter document title" 
+                                <input type="text" class="form-control form-control"
+                                       name="title"
+                                       placeholder="Enter document title"
                                        required>
                             </div>
 
@@ -200,8 +199,8 @@
                                     <i class="bi bi-paperclip text-muted me-1"></i>
                                     Choose File
                                 </label>
-                                <input type="file" class="form-control form-control" 
-                                       name="file" 
+                                <input type="file" class="form-control form-control"
+                                       name="file"
                                        required>
                             </div>
 
@@ -358,7 +357,7 @@ $('.history-btn').click(function(){
 $('#addSubfolderInput').click(function() {
     $('#subfolderInputs').append(`
         <div class="mb-2 subfolder-input">
-            <input type="text" name="names[]" class="form-control form-control-sm" 
+            <input type="text" name="names[]" class="form-control form-control-sm"
                    placeholder="Subfolder name" required>
         </div>
     `);

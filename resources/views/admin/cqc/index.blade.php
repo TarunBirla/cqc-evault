@@ -23,23 +23,19 @@
     @endif
 
     <div class="row g-4">
-
         @forelse($folders as $folder)
         <div class="col-lg-6 col-md-6">
             <div class="folder-item">
-                <div class="card border hover-shadow transition-all h-100" 
-                     style="transition: all 0.3s ease;">
+                <div class="card border hover-shadow transition-all h-100" style="transition: all 0.3s ease;">
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center justify-content-between">
-
-                            <!-- LEFT : ICON + NAME -->
                             <div class="d-flex align-items-center gap-3 flex-grow-1" style="min-width: 0;">
                                 <div class="folder-icon">
                                     <i class="bi bi-folder-fill text-warning" style="font-size: 3rem;"></i>
                                 </div>
 
                                 <div class="flex-grow-1" style="min-width: 0;">
-                                    <h5 class="mb-1 fw-bold text-truncate" 
+                                    <h5 class="mb-1 fw-bold text-truncate"
                                         title="{{ $folder->name }}">
                                         {{ $folder->name }}
                                     </h5>
@@ -114,8 +110,8 @@
                             <i class="bi bi-tag-fill text-muted me-1"></i>
                             Folder Name
                         </label>
-                        <input type="text" 
-                               name="name" 
+                        <input type="text"
+                               name="name"
                                class="form-control form-control-lg"
                                placeholder="Enter folder name"
                                required
@@ -260,16 +256,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const deleteModal = new bootstrap.Modal(document.getElementById('deleteFolderModal'));
     const deleteFolderForm = document.getElementById('deleteFolderForm');
     const folderNameDisplay = document.getElementById('folderNameDisplay');
-    
+
     deleteButtons.forEach(button => {
         button.addEventListener('click', function() {
             const folderId = this.getAttribute('data-folder-id');
             const folderName = this.getAttribute('data-folder-name');
-            
+
             // Update modal content
             folderNameDisplay.textContent = folderName;
             deleteFolderForm.action = '{{ url("cqc-vault/folder") }}/' + folderId;
-            
+
             // Show modal
             deleteModal.show();
         });

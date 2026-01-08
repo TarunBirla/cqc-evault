@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Folder extends Model
 {
-    protected $fillable = ['name','parent_id','year'];
+    protected $fillable = ['name','parent_id','year' ,'status'];
 
     public function children() {
         return $this->hasMany(Folder::class, 'parent_id');
@@ -16,6 +16,6 @@ class Folder extends Model
     public function documents() {
         return $this->hasMany(Document::class);
     }
-     
+
 }
 

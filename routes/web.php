@@ -7,6 +7,9 @@ use App\Http\Controllers\Admin\CqcVaultController;
 Route::get('/', [CqcVaultController::class,'index']);
 Route::get('cqc-vault', [CqcVaultController::class,'index']);
 
+// Audit logs
+Route::get('cqc-vault/audit-logs', [CqcVaultController::class,'auditLogs']);
+
 // Folder creation
 Route::get('cqc-vault/folder/create', [CqcVaultController::class,'createFolderPage']);
 Route::post('cqc-vault/folder/create', [CqcVaultController::class,'createFolder']);
