@@ -62,18 +62,32 @@
 @forelse($folder->documents as $doc)
 <tr>
 <td>{{ $doc->title }}</td>
+
 <td class="text-center">
 <a href="{{ asset($doc->file_path) }}" target="_blank">
 <i class="bi bi-eye text-primary"></i>
 </a>
 </td>
+
 <td class="text-center">
 <button class="btn btn-sm btn-info history-btn" data-id="{{ $doc->id }}">
 <i class="bi bi-clock-history"></i>
 </button>
 </td>
+
+<td class="text-center">
+<form method="POST" action="{{ url('cqc-vault/document/'.$doc->id) }}"
+      onsubmit="return confirm('Are you sure you want to delete this document?')">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-sm btn-danger">
+        <i class="bi bi-trash"></i>
+    </button>
+</form>
+</td>
 </tr>
 @empty
+
 <tr><td colspan="3" class="text-center text-muted">No documents uploaded.</td></tr>
 @endforelse
 </tbody>

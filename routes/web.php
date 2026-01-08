@@ -26,6 +26,7 @@ Route::post('cqc-vault/folder/{id}/subfolders', [CqcVaultController::class,'addS
 // Delete a folder
 Route::delete('cqc-vault/folder/{id}', [CqcVaultController::class,'dFolder']);
 Route::delete('cqc-vault/folder/{id}', [CqcVaultController::class,'deleteFolder']);
+Route::delete('cqc-vault/document/{id}', [CqcVaultController::class, 'deleteDocument']);
 
 
 

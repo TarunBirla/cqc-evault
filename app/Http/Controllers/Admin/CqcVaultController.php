@@ -145,6 +145,23 @@ public function deleteFolder($id)
 
     return back()->with('success', 'Folder deleted successfully');
 }
+public function deleteDocument($id)
+{
+    $doc = Document::findOrFail($id);
+
+    // File delete from public folder
+    if ($doc->file_path && file_exists(public_path($doc->file_path))) {
+        unlink(public_path($doc->file_path));
+    }
+
+    // Optional: delete document history
+    DocumentHistory::where('document_id', $doc->id)->delete();
+
+    // Delete document record
+    $doc->delete();
+
+    return back()->with('success', 'Document deleted successfully');
+}
 
 
 }
