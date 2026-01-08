@@ -19,7 +19,7 @@
     <div class="row g-4">
 
         <!-- LEFT SIDEBAR: Subfolders -->
-        <div class="col-lg-3 col-md-4">
+        <div class="col-lg-5 col-md-4">
             <div class="card shadow-sm border-0 sticky-top" style="top: 20px;">
                 <div class="card-header bg-gradient text-white" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
                     <h6 class="mb-0 fw-semibold">
@@ -62,7 +62,7 @@
                             @csrf
                             <div id="subfolderInputs">
                                 <div class="mb-2 subfolder-input">
-                                    <input type="text" name="names[]" class="form-control form-control-sm" 
+                                    <input type="text" name="names[]" class="form-control form-control-lg" 
                                            placeholder="Subfolder name" required>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
         </div>
 
         <!-- RIGHT CONTENT: Documents -->
-        <div class="col-lg-9 col-md-8">
+        <div class="col-lg-7 col-md-8">
             
             <!-- Documents Card -->
             <div class="card shadow-sm border-0 mb-4">
@@ -100,13 +100,13 @@
                                     <th class="px-4 py-3">
                                         <i class="bi bi-file-text me-1"></i>Document Title
                                     </th>
-                                    <th class="text-center px-3 py-3" width="100">
+                                    <th class="text-center px-3 py-3" width="120">
                                         <i class="bi bi-eye me-1"></i>View
                                     </th>
-                                    <th class="text-center px-3 py-3" width="100">
+                                    <th class="text-center px-3 py-3" width="120">
                                         <i class="bi bi-clock-history me-1"></i>History
                                     </th>
-                                    <th class="text-center px-3 py-3" width="100">
+                                    <th class="text-center px-3 py-3" width="120">
                                         <i class="bi bi-trash me-1"></i>Delete
                                     </th>
                                 </tr>
@@ -152,7 +152,7 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="4" class="text-center py-5">
+                                    <td colspan="4" class="text-center py-2">
                                         <div>
                                             <i class="bi bi-file-earmark-x" style="font-size: 3rem; color: #dee2e6;"></i>
                                             <h6 class="text-muted mt-3 mb-2">No Documents Yet</h6>
@@ -187,7 +187,7 @@
                                     <i class="bi bi-tag-fill text-muted me-1"></i>
                                     Document Title
                                 </label>
-                                <input type="text" class="form-control form-control-lg" 
+                                <input type="text" class="form-control form-control-sm" 
                                        name="title" 
                                        placeholder="Enter document title" 
                                        required>
@@ -198,13 +198,13 @@
                                     <i class="bi bi-paperclip text-muted me-1"></i>
                                     Choose File
                                 </label>
-                                <input type="file" class="form-control form-control-lg" 
+                                <input type="file" class="form-control form-control-sm" 
                                        name="file" 
                                        required>
                             </div>
 
                             <div class="col-12">
-                                <button type="submit" class="btn btn-success btn-lg">
+                                <button type="submit" class="btn btn-success btn-sm">
                                     <i class="bi bi-upload me-2"></i>
                                     Upload Document
                                 </button>
