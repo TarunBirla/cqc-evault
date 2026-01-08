@@ -23,7 +23,7 @@ class CqcVaultController extends Controller
 }
 
 
- public function upload(Request $request)
+public function upload(Request $request)
 {
     $request->validate([
         'title' => 'required',
@@ -31,25 +31,39 @@ class CqcVaultController extends Controller
     ]);
 
     $file = $request->file('file');
-    $filename = time().'_'.$file->getClientOriginalName();  // unique name
-    $path = $file->storeAs('cqc', $filename, 'public');    // store in storage/app/public/cqc
 
+    // Create a unique filename
+    $filename = time().'_'.$file->getClientOriginalName();
+
+    // Define the public folder path
+    $destinationPath = public_path('cqc'); // public/cqc
+
+    // Make folder if it doesn't exist
+    if (!file_exists($destinationPath)) {
+        mkdir($destinationPath, 0755, true);
+    }
+
+    // Move the file to public/cqc
+    $file->move($destinationPath, $filename);
+
+    // Save in DB (file_path relative to public/)
     $doc = Document::create([
         'folder_id'   => $request->folder_id,
         'title'       => $request->title,
-        'file_path'   => $path, // cqc/<filename>
+        'file_path'   => 'cqc/'.$filename, // directly under public/cqc
         'uploaded_by' => 1
     ]);
 
     DocumentHistory::create([
         'document_id' => $doc->id,
         'action'      => 'uploaded',
-        'file_path'   => $path,
+        'file_path'   => 'cqc/'.$filename,
         'created_at'  => now()
     ]);
 
     return back()->with('success','Document Uploaded');
 }
+
 
 
 

@@ -44,9 +44,10 @@
 <tr>
 <td>{{ $doc->title }}</td>
 <td class="text-center">
-<a href="{{ asset('storage/'.$doc->file_path) }}" target="_blank">
-<i class="bi bi-eye text-primary"></i>
+<a href="{{ asset($doc->file_path) }}" target="_blank">
+    <i class="bi bi-eye text-primary"></i>
 </a>
+
 </td>
 <td class="text-center">
 <button class="btn btn-sm btn-info history-btn"
