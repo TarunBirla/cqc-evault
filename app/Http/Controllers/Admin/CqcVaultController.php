@@ -16,11 +16,12 @@ class CqcVaultController extends Controller
         return view('admin.cqc.index', compact('folders'));
     }
 
-    public function viewFolder($id)
-    {
-        $folder = Folder::with('documents')->findOrFail($id);
-        return view('admin.cqc.folder', compact('folder'));
-    }
+   public function viewFolder($id)
+{
+    $folder = Folder::with(['children','documents'])->findOrFail($id);
+    return view('admin.cqc.folder',compact('folder'));
+}
+
 
    public function upload(Request $request)
 {
