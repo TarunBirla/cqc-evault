@@ -2,45 +2,89 @@
 
 @section('content')
 
-<h4>CQC E-Vault</h4>
+<h4 class="mb-4 fw-bold">CQC E-Vault</h4>
 
 @if(session('success'))
 <div class="alert alert-success">{{ session('success') }}</div>
 @endif
 
-<!-- CREATE FOLDER -->
-<form method="POST" action="{{ url('cqc-vault/folder/create') }}" class="mb-4">
-    @csrf
-    <div class="row">
-        <div class="col-md-9">
-            <input name="name" class="form-control" placeholder="New Folder Name" required>
-        </div>
-        <div class="col-md-3">
-            <button class="btn btn-success w-100">Create Folder</button>
-        </div>
-    </div>
-</form>
-
-<!-- FOLDERS -->
 <div class="row">
-@foreach($folders as $folder)
-<div class="col-md-3 mb-3">
-    <div class="card text-center shadow-sm">
-        <div class="card-body">
-            <i class="bi bi-folder-fill fs-1 text-warning"></i>
-            <h6 class="mt-2">{{ $folder->name }}</h6>
-            <a href="{{ url('cqc-vault/folder/'.$folder->id) }}" class="btn btn-primary btn-sm mb-1">View</a>
 
-            <!-- DELETE FORM -->
-            <form method="POST" action="{{ url('cqc-vault/folder/'.$folder->id) }}" onsubmit="return confirm('Are you sure you want to delete this folder?')">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-            </form>
+    <!-- LEFT SIDE : CREATE FOLDER -->
+    <div class="col-md-6">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header fw-bold">
+                <i class="bi bi-folder-plus me-1"></i> Create New Folder
+            </div>
+
+            <div class="card-body">
+                <form method="POST" action="{{ url('cqc-vault/folder/create') }}">
+                    @csrf
+
+                    <div class="mb-3">
+                        <label class="form-label">Folder Name</label>
+                        <input type="text" name="name" class="form-control"
+                               placeholder="Enter folder name" required>
+                    </div>
+
+                    <button class="btn btn-success w-100">
+                        <i class="bi bi-plus-circle me-1"></i> Create Folder
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-@endforeach
-</div>
 
+    <!-- RIGHT SIDE : FOLDER LIST -->
+    <div class="col-md-6">
+        <div class="row">
+
+            @forelse($folders as $folder)
+            <div class="col-md-6 mb-3">
+                <div class="card shadow-sm h-100 folder-card">
+                    <div class="card-body text-center">
+
+                        <i class="bi bi-folder-fill text-warning fs-1"></i>
+
+                        <h6 class="mt-2 fw-bold text-truncate">
+                            {{ $folder->name }}
+                        </h6>
+
+                        <div class="d-flex justify-content-center gap-2 mt-3">
+
+                            <!-- VIEW -->
+                            <a href="{{ url('cqc-vault/folder/'.$folder->id) }}"
+                               class="btn btn-sm btn-outline-primary"
+                               title="View Folder">
+                                <i class="bi bi-eye"></i>
+                            </a>
+
+                            <!-- DELETE -->
+                            <form method="POST"
+                                  action="{{ url('cqc-vault/folder/'.$folder->id) }}"
+                                  onsubmit="return confirm('Delete this folder?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                        class="btn btn-sm btn-outline-danger"
+                                        title="Delete Folder">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            @empty
+            <div class="col-12 text-center text-muted">
+                No folders created yet.
+            </div>
+            @endforelse
+
+        </div>
+    </div>
+
+</div>
 @endsection
