@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container-fluid">
+< class="container-fluid">
     <!-- Header with Back Button -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
@@ -19,7 +19,9 @@
     <div class="row g-4">
 
         <!-- LEFT SIDEBAR: Subfolders -->
-        <div class="col-lg-5 col-md-4">
+       @if($folder->parent_id === null)
+<div class="col-lg-5 col-md-4">
+
             <div class="card shadow-sm border-0 sticky-top" style="top: 20px;">
                 <div class="card-header bg-gradient text-white" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
                     <h6 class="mb-0 fw-semibold">
@@ -78,9 +80,10 @@
                 </div>
             </div>
         </div>
-
+@endif
         <!-- RIGHT CONTENT: Documents -->
-        <div class="col-lg-7 col-md-8">
+       <div class="{{ $folder->parent_id === null ? 'col-lg-7 col-md-8' : 'col-12' }}">
+
             
             <!-- Documents Card -->
             <div class="card shadow-sm border-0 mb-4">
@@ -216,7 +219,8 @@
 
         </div>
     </div>
-</div>
+
+
 
 <!-- HISTORY MODAL -->
 <div class="modal fade" id="historyModal" tabindex="-1">
