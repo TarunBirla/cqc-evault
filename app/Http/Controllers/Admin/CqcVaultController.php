@@ -30,13 +30,13 @@ class CqcVaultController extends Controller
     }
     public function index()
     {
-        $folders = Folder::whereNull('parent_id')->get();
+        $folders = Folder::whereNull('parent_id')->where('status','1')->get();
         return view('admin.cqc.index', compact('folders'));
     }
 
     public function viewFolder($id)
     {
-        $folder = Folder::with(['children','documents'])->findOrFail($id);
+        $folder = Folder::with(['children','documents'])->where('status','1')->findOrFail($id);
         return view('admin.cqc.folder',compact('folder'));
     }
 
@@ -166,7 +166,7 @@ class CqcVaultController extends Controller
 
         // Optional: delete subfolders recursively
         foreach($folder->children as $child) {
-            $child->status = '1';
+            $child->status = '0';
             $child->save();
             $this->auditLog(
                 'subfolder_deleted',
@@ -193,7 +193,7 @@ class CqcVaultController extends Controller
     public function deleteFolder($id)
     {
         $folder = Folder::findOrFail($id);
-        $folder->status = '1';
+        $folder->status = '0';
         $folder->save();
 
         $this->auditLog(
