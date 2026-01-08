@@ -166,7 +166,7 @@ class CqcVaultController extends Controller
 
         // Optional: delete subfolders recursively
         foreach($folder->children as $child) {
-            $child->status = '0';
+            $child->status = '1';
             $child->save();
             $this->auditLog(
                 'subfolder_deleted',
@@ -193,7 +193,7 @@ class CqcVaultController extends Controller
     public function deleteFolder($id)
     {
         $folder = Folder::findOrFail($id);
-        $folder->status = '0';
+        $folder->status = '1';
         $folder->save();
 
         $this->auditLog(
