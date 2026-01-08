@@ -199,6 +199,16 @@
     border-left: 4px solid transparent;
     border-radius: 10px;
 }
+/* REMOVE TOP GAP FROM MODAL */
+.modal-dialog {
+    margin-top: 0 !important;
+}
+
+/* Optional: Modal ko thoda upar chipkao */
+.modal {
+    padding-top: 0 !important;
+}
+
 
 .folder-item .card:hover {
     border-left-color: #667eea;

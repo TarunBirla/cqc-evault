@@ -283,6 +283,15 @@
 .subfolder-input {
     animation: slideIn 0.3s ease;
 }
+/* REMOVE TOP GAP FROM MODAL */
+.modal-dialog {
+    margin-top: 0 !important;
+}
+
+/* Optional: Modal ko thoda upar chipkao */
+.modal {
+    padding-top: 0 !important;
+}
 
 @keyframes slideIn {
     from {
