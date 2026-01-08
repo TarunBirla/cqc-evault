@@ -40,6 +40,10 @@ body{ background:#f4f6f9; }
 <a href="{{ url('cqc-vault') }}">
 <i class="bi bi-folder2-open me-2"></i>CQC E-Vault
 </a>
+
+<a href="{{ url('cqc-vault/folder/create') }}">
+        <i class="bi bi-plus-circle me-2"></i>Create Folder
+    </a>
 </div>
 
 <!-- CONTENT -->
