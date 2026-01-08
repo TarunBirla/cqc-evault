@@ -2,7 +2,6 @@
 
 @section('content')
 
-< class="container-fluid">
     <!-- Header with Back Button -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
