@@ -49,11 +49,6 @@
                         </li>
                         @endforeach
                     </ul>
-                    @else
-                    <div class="p-3 text-center text-muted">
-                        <i class="bi bi-folder-x" style="font-size: 2rem;"></i>
-                        <p class="mb-0 mt-2 small">No subfolders yet</p>
-                    </div>
                     @endif
 
                     <!-- Add Multiple Subfolders -->

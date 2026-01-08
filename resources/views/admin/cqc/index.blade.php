@@ -21,10 +21,10 @@
     <div class="row g-4">
 
         <!-- LEFT SIDE : CREATE FOLDER -->
-        <div class="col-lg-4 col-md-5">
+        <div class="col-lg-5 col-md-5">
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-header bg-gradient text-white" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                    <h5 class="mb-0 fw-semibold">
+                    <h5 class="mb-0">
                         <i class="bi bi-folder-plus me-2"></i>
                         Create New Folder
                     </h5>
@@ -42,7 +42,7 @@
                             <input type="text" 
                                    name="name" 
                                    class="form-control form-control-lg"
-                                   placeholder="e.g., Staff Documents"
+                                   placeholder="Enter folder name"
                                    required
                                    autofocus>
                         </div>
@@ -64,7 +64,7 @@
         </div>
 
         <!-- RIGHT SIDE : FOLDER LIST -->
-        <div class="col-lg-8 col-md-7">
+        <div class="col-lg-7 col-md-7">
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-white border-bottom">
                     <h5 class="mb-0 fw-semibold text-dark">
