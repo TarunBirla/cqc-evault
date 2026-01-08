@@ -56,6 +56,7 @@
 <th>Title</th>
 <th width="80">View</th>
 <th width="80">History</th>
+<th width="80">Delete</th>
 </tr>
 </thead>
 <tbody>
