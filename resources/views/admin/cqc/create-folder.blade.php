@@ -11,11 +11,9 @@
 <!-- CREATE FOLDER FORM -->
 <form method="POST" action="{{ url('cqc-vault/folder/create') }}" class="mb-4">
     @csrf
-    <div class="row">
-        <div class="col-md-6 mb-2">
-            <input type="text" name="name" class="form-control" placeholder="Folder Name" required>
-        </div>
-        <div class="col-md-6 mb-2">
+    <div class="row mb-2">
+        <!-- Parent Folder Dropdown -->
+        <div class="col-md-6">
             <select name="parent_id" class="form-select">
                 <option value="">-- Select Parent Folder (for Subfolder) --</option>
                 @foreach($folders as $folder)
@@ -23,25 +21,41 @@
                 @endforeach
             </select>
         </div>
-        <div class="col-md-12">
-            <button class="btn btn-success w-100">Create Folder</button>
+        <!-- Top-level folder name -->
+        <div class="col-md-6">
+            <input type="text" name="names[]" class="form-control" placeholder="Folder Name" required>
         </div>
     </div>
+
+    <!-- Button to add more folder inputs -->
+    <div id="additional-folders"></div>
+    <button type="button" class="btn btn-secondary mb-2" id="addFolderInput">+ Add Another Subfolder</button>
+
+    <button class="btn btn-success w-100">Create Folder(s)</button>
 </form>
 
-<!-- EXISTING FOLDERS -->
-<h5>Top-Level Folders</h5>
-<div class="row">
-    @foreach($folders as $folder)
-    <div class="col-md-3 mb-3">
-        <div class="card shadow-sm text-center">
-            <div class="card-body">
-                <i class="bi bi-folder-fill fs-1 text-warning"></i>
-                <h6 class="mt-2">{{ $folder->name }}</h6>
+<script>
+$(document).ready(function() {
+    let counter = 1;
+    $('#addFolderInput').click(function() {
+        counter++;
+        $('#additional-folders').append(`
+            <div class="row mb-2" id="folderRow${counter}">
+                <div class="col-md-6">
+                    <select name="parent_id" class="form-select">
+                        <option value="">-- Select Parent Folder (for Subfolder) --</option>
+                        @foreach($folders as $folder)
+                        <option value="{{ $folder->id }}">{{ $folder->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" name="names[]" class="form-control" placeholder="Folder Name" required>
+                </div>
             </div>
-        </div>
-    </div>
-    @endforeach
-</div>
+        `);
+    });
+});
+</script>
 
 @endsection

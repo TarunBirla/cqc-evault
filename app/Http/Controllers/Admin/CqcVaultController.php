@@ -85,17 +85,22 @@ public function createFolderPage()
 public function createFolder(Request $request)
 {
     $request->validate([
-        'name' => 'required|string|max:255',
+        'names' => 'required|array',
+        'names.*' => 'required|string|max:255',
+        'parent_id' => 'nullable|exists:folders,id'
     ]);
 
-    Folder::create([
-        'name'      => $request->name,
-        'parent_id' => $request->parent_id ?: null, // null if top-level
-        'year'      => $request->year ?: null
-    ]);
+    foreach ($request->names as $name) {
+        Folder::create([
+            'name' => $name,
+            'parent_id' => $request->parent_id ?: null,
+            'year' => null
+        ]);
+    }
 
-    return back()->with('success','Folder created successfully');
+    return back()->with('success','Folder(s) created successfully');
 }
+
 
 
 
