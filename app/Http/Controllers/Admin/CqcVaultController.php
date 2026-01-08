@@ -90,6 +90,13 @@ public function upload(Request $request)
 // Add multiple subfolders under current folder
 public function addSubfolders(Request $request, $folderId)
 {
+    $parentFolder = Folder::findOrFail($folderId);
+
+    // ❌ Agar ye already subfolder hai to allow mat karo
+    if ($parentFolder->parent_id !== null) {
+        return back()->with('error', 'Subfolder ke andar aur subfolder create nahi ho sakta');
+    }
+
     $request->validate([
         'names' => 'required|array',
         'names.*' => 'required|string|max:255',
@@ -104,6 +111,7 @@ public function addSubfolders(Request $request, $folderId)
 
     return back()->with('success', 'Subfolder(s) created successfully');
 }
+
 
 // Delete a folder (and optionally its subfolders and documents)
 public function dFolder($id)

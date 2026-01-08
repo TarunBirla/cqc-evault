@@ -27,6 +27,8 @@
 </ul>
 
 <!-- Add Multiple Subfolders -->
+@if($folder->parent_id === null)
+<!-- Add Multiple Subfolders -->
 <h6 class="px-3">Add Subfolders</h6>
 <form method="POST" action="{{ url('cqc-vault/folder/'.$folder->id.'/subfolders') }}">
     @csrf
@@ -38,6 +40,8 @@
     <button type="button" class="btn btn-secondary mb-2 w-100" id="addSubfolderInput">+ Add Another</button>
     <button class="btn btn-success w-100">Create Subfolder(s)</button>
 </form>
+@endif
+
 </div>
 </div>
 
