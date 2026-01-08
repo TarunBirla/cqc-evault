@@ -67,13 +67,22 @@ public function upload(Request $request)
 
 
 
+
     public function history($id)
     {
         $history = DocumentHistory::where('document_id',$id)->get();
         return response()->json($history);
     }
 
- public function createFolder(Request $request)
+// Show page to create folder/subfolder
+public function createFolderPage()
+{
+    $folders = Folder::whereNull('parent_id')->get(); // top-level folders
+    return view('admin.cqc.create-folder', compact('folders'));
+}
+
+// Create folder/subfolder
+public function createFolder(Request $request)
 {
     $request->validate([
         'name' => 'required|string|max:255',
@@ -81,12 +90,13 @@ public function upload(Request $request)
 
     Folder::create([
         'name'      => $request->name,
-        'parent_id' => $request->parent_id ?: null,
+        'parent_id' => $request->parent_id ?: null, // null if top-level
         'year'      => $request->year ?: null
     ]);
 
     return back()->with('success','Folder created successfully');
 }
+
 
 
 }

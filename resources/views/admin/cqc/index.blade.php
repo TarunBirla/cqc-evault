@@ -4,18 +4,10 @@
 
 <h4>CQC E-Vault</h4>
 
-<!-- CREATE FOLDER -->
-<form method="POST" action="{{ url('cqc-vault/folder/create') }}" class="mb-4">
-@csrf
-<div class="row">
-<div class="col-md-9">
-<input name="name" class="form-control" placeholder="New Folder Name" required>
-</div>
-<div class="col-md-3">
-<button class="btn btn-success w-100">Create Folder</button>
-</div>
-</div>
-</form>
+<!-- CREATE FOLDER BUTTON -->
+<a href="{{ url('cqc-vault/folder/create') }}" class="btn btn-primary mb-3">
+Create New Folder
+</a>
 
 <!-- FOLDERS -->
 <div class="row">
