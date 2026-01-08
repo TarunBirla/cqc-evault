@@ -25,6 +25,8 @@ class CqcVaultController extends Controller
 
    public function upload(Request $request)
 {
+
+    dd($request->all(), $request->file('file'));
     $request->validate([
         'title' => 'required',
         'file'  => 'required|file|max:10240'
