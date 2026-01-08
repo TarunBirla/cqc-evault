@@ -110,14 +110,14 @@
                 @csrf
                 <div class="modal-body p-4">
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">
+                        <label class="form-label fw-semibold text-lg">
                             <i class="bi bi-tag-fill text-muted me-1"></i>
                             Folder Name
                         </label>
                         <input type="text" 
                                name="name" 
                                class="form-control form-control-lg"
-                               placeholder="e.g., Staff Documents, Policies, Training"
+                               placeholder="Enter folder name"
                                required
                                autofocus>
                     </div>
