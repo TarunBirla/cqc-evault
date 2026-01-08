@@ -37,29 +37,35 @@
 
     <!-- RIGHT SIDE : FOLDER LIST -->
     <div class="col-md-6">
-        <div class="row">
+    <div class="row">
 
-            @forelse($folders as $folder)
-            <div class="col-md-6 mb-3">
-                <div class="card shadow-sm h-100 folder-card">
-                    <div class="card-body text-center">
+        @forelse($folders as $folder)
+        <div class="col-md-12 mb-3">
+            <div class="card shadow-sm folder-card">
+                <div class="card-body">
 
-                        <i class="bi bi-folder-fill text-warning fs-1"></i>
+                    <div class="d-flex align-items-center justify-content-between">
 
-                        <h6 class="mt-2 fw-bold text-truncate">
-                            {{ $folder->name }}
-                        </h6>
+                        <!-- LEFT : ICON + NAME -->
+                        <div class="d-flex align-items-center gap-3" style="max-width:70%;">
+                            <i class="bi bi-folder-fill text-warning fs-2"></i>
 
-                        <div class="d-flex justify-content-center gap-2 mt-3">
+                            <span class="fw-bold text-truncate"
+                                  style="max-width:200px;"
+                                  title="{{ $folder->name }}">
+                                {{ $folder->name }}
+                            </span>
+                        </div>
 
-                            <!-- VIEW -->
+                        <!-- RIGHT : ACTIONS -->
+                        <div class="d-flex gap-2">
+
                             <a href="{{ url('cqc-vault/folder/'.$folder->id) }}"
                                class="btn btn-sm btn-outline-primary"
                                title="View Folder">
                                 <i class="bi bi-eye"></i>
                             </a>
 
-                            <!-- DELETE -->
                             <form method="POST"
                                   action="{{ url('cqc-vault/folder/'.$folder->id) }}"
                                   onsubmit="return confirm('Delete this folder?')">
@@ -75,16 +81,19 @@
                         </div>
 
                     </div>
+
                 </div>
             </div>
-            @empty
-            <div class="col-12 text-center text-muted">
-                No folders created yet.
-            </div>
-            @endforelse
-
         </div>
+        @empty
+        <div class="col-12 text-center text-muted">
+            No folders created yet.
+        </div>
+        @endforelse
+
     </div>
+</div>
+
 
 </div>
 @endsection
