@@ -14,9 +14,8 @@ Route::post('/login',[AuthController::class,'login']);
 
 Route::get('/logout',[AuthController::class,'logout']);
 
-
-
-// Show main index page
+Route::middleware(['auth'])->group(function () {
+    // Show main index page
 Route::get('/', [CqcVaultController::class,'index']);
 Route::get('cqc-vault', [CqcVaultController::class,'index']);
 
@@ -43,6 +42,10 @@ Route::post('cqc-vault/folder/{id}/subfolders', [CqcVaultController::class,'addS
 Route::delete('cqc-vault/folder/{id}', [CqcVaultController::class,'dFolder']);
 Route::delete('cqc-vault/folder/{id}', [CqcVaultController::class,'deleteFolder']);
 Route::delete('cqc-vault/document/{id}', [CqcVaultController::class, 'deleteDocument']);
+});
+
+
+
 
 
 
