@@ -53,7 +53,7 @@ class AuthController extends Controller
             User::where('id',Auth::id())->update([
                 'last_login' => now()
             ]);
-            return redirect('/dashboard');
+            return redirect('/');
         }
 
         return back()->with('error','Invalid credentials or account disabled');
