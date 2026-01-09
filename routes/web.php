@@ -3,6 +3,19 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CqcVaultController;
 
+
+use App\Http\Controllers\AuthController;
+
+Route::get('/register',[AuthController::class,'showRegister']);
+Route::post('/register',[AuthController::class,'register']);
+
+Route::get('/login',[AuthController::class,'showLogin'])->name('login');
+Route::post('/login',[AuthController::class,'login']);
+
+Route::get('/logout',[AuthController::class,'logout']);
+
+
+
 // Show main index page
 Route::get('/', [CqcVaultController::class,'index']);
 Route::get('cqc-vault', [CqcVaultController::class,'index']);
