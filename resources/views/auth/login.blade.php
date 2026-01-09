@@ -3,36 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 body{
     background:#eaf1f8;
-    height:100vh;
+    min-height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
     font-family:'Poppins', sans-serif;
+    padding:15px;
 }
 
 .login-wrapper{
-    width:900px;
-    height:520px;
+    max-width:900px;
+    width:100%;
     background:#fff;
     border-radius:15px;
     overflow:hidden;
     box-shadow:0 15px 40px rgba(0,0,0,.1);
-    display:flex;
 }
 
 /* LEFT PANEL */
 .login-left{
-    width:50%;
     background:linear-gradient(135deg,#2f80ed,#56ccf2);
     color:#fff;
     padding:50px;
     position:relative;
+    min-height:520px;
 }
 
 .login-left::after{
@@ -59,7 +61,6 @@ body{
 
 /* RIGHT PANEL */
 .login-right{
-    width:50%;
     padding:60px 50px;
 }
 
@@ -96,48 +97,52 @@ body{
     background:#1c6ed5;
 }
 
-.small-link{
-    color:#2f80ed;
-    text-decoration:none;
-    font-weight:500;
-}
+/* MOBILE FIXES */
+@media(max-width:768px){
+    .login-left{
+        min-height:auto;
+        padding:40px 25px;
+        text-align:center;
+    }
 
-.checkbox-label{
-    font-size:14px;
-    color:#777;
+    .login-right{
+        padding:40px 25px;
+    }
+
+    .login-left h1{
+        font-size:26px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="login-wrapper">
+<div class="login-wrapper container-fluid">
+    <div class="row g-0">
 
-    <!-- LEFT -->
-    <div class="login-left text-center ">
-        <small>CQC EVault</small>
-        <h1 class="mt-4">WELCOME BACK</h1>
-        <p>Nice to see you again!  
-        Enter your credentials to access your account and continue your journey with us.</p>
+        <!-- LEFT -->
+        <div class="col-lg-6 col-md-6 col-12 login-left d-flex flex-column justify-content-center text-center">
+            <small>CQC EVault</small>
+            <h1 class="mt-4">WELCOME BACK</h1>
+            <p>Nice to see you again!  
+            Enter your credentials to access your account and continue your journey with us.</p>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="col-lg-6 col-md-6 col-12 login-right d-flex flex-column justify-content-center">
+            <h4>Login Account</h4>
+            <p class="text-muted mb-4">Enter your email and password to login</p>
+
+            <form method="POST" action="/login">
+                @csrf
+                <input type="email" name="email" class="form-control mb-3" placeholder="Email ID" required>
+                <input type="password" name="password" class="form-control mb-3" placeholder="Password" required>
+                <button class="login-btn">Login</button>
+            </form>
+        </div>
+
     </div>
-
-    <!-- RIGHT -->
-    <div class="login-right">
-        <h4>Login Account</h4>
-        <p class="text-muted mb-4">Enter your email and password to login</p>
-
-        <form method="POST" action="/login">
-            @csrf
-
-            <input type="email" name="email" class="form-control mb-3" placeholder="Email ID" required>
-            <input type="password" name="password" class="form-control mb-3" placeholder="Password" required>
-
-            
-
-            <button class="login-btn">Login</button>
-        </form>
-    </div>
-
 </div>
 
 </body>
