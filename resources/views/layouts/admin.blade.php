@@ -15,7 +15,7 @@
             width:240px;
             height:100vh;
             position:fixed;
-            background:#1f2937;
+            background:#0d6efd;
             color:white;
         }
         .sidebar a{
@@ -64,7 +64,7 @@
 
         <!-- Logout -->
          <!-- Logout -->
-    <a href="{{ url('/logout') }}" class="mt-3 text-danger">
+    <a href="{{ url('/logout') }}" class="mt-3 btn btn-danger btn-sm text-white">
         <i class="bi bi-box-arrow-right me-2"></i>Logout
     </a>
 
