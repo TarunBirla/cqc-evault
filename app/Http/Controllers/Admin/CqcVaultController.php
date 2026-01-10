@@ -16,6 +16,18 @@ class CqcVaultController extends Controller
         $logs = AuditLog::latest()->paginate(30);
         return view('admin.cqc.audit', compact('logs'));
     }
+    public function dashboard()
+    {
+        return view('admin.cqc.dashboard');
+    }
+    public function checklistfrequency()
+    {
+        return view('admin.cqc.checklist_frequency');
+    }
+    public function checklist()
+    {
+        return view('admin.cqc.checklist_cqc');
+    }
 
     public  function auditLog($action, $summary, $subject = null)
     {

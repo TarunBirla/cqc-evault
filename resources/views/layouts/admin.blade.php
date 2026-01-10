@@ -39,12 +39,20 @@
 
     <h5 class="p-3 border-bottom">Admin Panel</h5>
 
+    <a href="{{ url('admin/dashboard') }}">
+        <i class="bi bi-speedometer2 me-2"></i>Dashboard
+    </a>
     <a href="{{ url('cqc-vault') }}">
         <i class="bi bi-folder2-open me-2"></i>CQC E-Vault
     </a>
-
+    <a href="{{ url('admin/checklist-frequency') }}">
+        <i class="bi bi-calendar-check me-2"></i> Checklist Frequency
+    </a>
+    <a href="{{ url('admin/checklist-cqc') }}">
+        <i class="bi bi-list-check me-2"></i> Checklist CQC
+    </a>
     <a href="{{ url('cqc-vault/audit-logs') }}">
-        <i class="bi bi-journal-text me-2"></i>Audit Logs
+        <i class="bi bi-journal-text me-2"></i>Audit CQC E-Vault
     </a>
 
     <!-- Push user info to bottom -->
@@ -52,7 +60,7 @@
 
         <!-- User -->
         <div class="d-flex align-items-center ">
-            <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center me-2" 
+            <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center me-2"
                  style="width:40px;height:40px;">
                 <i class="bi bi-person text-white fs-5"></i>
             </div>

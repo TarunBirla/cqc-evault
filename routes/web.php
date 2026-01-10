@@ -19,6 +19,10 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', [CqcVaultController::class,'index']);
 Route::get('cqc-vault', [CqcVaultController::class,'index']);
 
+Route::get('admin/dashboard', [CqcVaultController::class,'dashboard']);
+Route::get('admin/checklist-frequency', [CqcVaultController::class,'checklistfrequency']);
+Route::get('admin/checklist-cqc', [CqcVaultController::class,'checklist']);
+
 // Audit logs
 Route::get('cqc-vault/audit-logs', [CqcVaultController::class,'auditLogs']);
 
