@@ -25,68 +25,68 @@
         .branding { text-align: center; margin-top: 40px; font-size: 0.9em; color: #999; }
     </style>
 
-<div class="container">
-    <h1>Nexteck CQC Evidence Tracker</h1>
-    <p class="subtitle">Ensuring your agency is "Inspection-Ready" 24/7</p>
+    <div class="container">
+        <h1>Nexteck CQC Evidence Tracker</h1>
+        <p class="subtitle">Ensuring your agency is "Inspection-Ready" 24/7</p>
 
-    <div class="tabs">
-        <button id="careBtn" class="btn-active" onclick="showTab('care')">Care Home (Residential)</button>
-        <button id="domBtn" class="btn-inactive" onclick="showTab('dom')">Domiciliary (Home Care)</button>
+        <div class="tabs">
+            <button id="careBtn" class="btn-active" onclick="showTab('care')">Care Home (Residential)</button>
+            <button id="domBtn" class="btn-inactive" onclick="showTab('dom')">Domiciliary (Home Care)</button>
+        </div>
+
+        <table id="checklistTable">
+            <thead>
+                <tr>
+                    <th>CQC Category</th>
+                    <th>Evidence Requirement</th>
+                    <th>Frequency</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                </tbody>
+        </table>
+
+        <div class="branding">
+            <strong>Nexteck Digital Solutions</strong> | nexteck.uk | 07879 175585
+        </div>
     </div>
 
-    <table id="checklistTable">
-        <thead>
-            <tr>
-                <th>CQC Category</th>
-                <th>Evidence Requirement</th>
-                <th>Frequency</th>
-            </tr>
-        </thead>
-        <tbody id="tableBody">
-            </tbody>
-    </table>
+    <script>
+        const careData = [
+            { cat: 'Safe', item: 'MAR Charts & Med Audits', freq: 'Daily', cls: 'daily' },
+            { cat: 'Safe', item: 'Fire Safety & Alarm Logs', freq: 'Weekly', cls: 'weekly' },
+            { cat: 'Effective', item: 'Deprivation of Liberty (DoLS) Tracker', freq: 'Monthly', cls: 'monthly' },
+            { cat: 'Caring', item: 'Resident Daily Choice Logs', freq: 'Daily', cls: 'daily' },
+            { cat: 'Responsive', item: 'Care Plan Reviews', freq: 'Monthly', cls: 'monthly' },
+            { cat: 'Well-Led', item: 'Manager Quality Audits', freq: 'Monthly', cls: 'monthly' }
+        ];
 
-    <div class="branding">
-        <strong>Nexteck Digital Solutions</strong> | nexteck.uk | 07879 175585
-    </div>
-</div>
+        const domData = [
+            { cat: 'Safe', item: 'Lone Worker Check-in Logs', freq: 'Daily', cls: 'daily' },
+            { cat: 'Safe', item: 'Field Supervision (Spot Checks)', freq: 'Monthly', cls: 'monthly' },
+            { cat: 'Effective', item: 'Staff Competency Sign-offs', freq: 'Quarterly', cls: 'monthly' },
+            { cat: 'Responsive', item: 'Late/Missed Call Mitigation', freq: 'Daily', cls: 'daily' },
+            { cat: 'Well-Led', item: 'Service User Feedback Surveys', freq: 'Monthly', cls: 'monthly' }
+        ];
 
-<script>
-    const careData = [
-        { cat: 'Safe', item: 'MAR Charts & Med Audits', freq: 'Daily', cls: 'daily' },
-        { cat: 'Safe', item: 'Fire Safety & Alarm Logs', freq: 'Weekly', cls: 'weekly' },
-        { cat: 'Effective', item: 'Deprivation of Liberty (DoLS) Tracker', freq: 'Monthly', cls: 'monthly' },
-        { cat: 'Caring', item: 'Resident Daily Choice Logs', freq: 'Daily', cls: 'daily' },
-        { cat: 'Responsive', item: 'Care Plan Reviews', freq: 'Monthly', cls: 'monthly' },
-        { cat: 'Well-Led', item: 'Manager Quality Audits', freq: 'Monthly', cls: 'monthly' }
-    ];
+        function showTab(type) {
+            const body = document.getElementById('tableBody');
+            const data = type === 'care' ? careData : domData;
 
-    const domData = [
-        { cat: 'Safe', item: 'Lone Worker Check-in Logs', freq: 'Daily', cls: 'daily' },
-        { cat: 'Safe', item: 'Field Supervision (Spot Checks)', freq: 'Monthly', cls: 'monthly' },
-        { cat: 'Effective', item: 'Staff Competency Sign-offs', freq: 'Quarterly', cls: 'monthly' },
-        { cat: 'Responsive', item: 'Late/Missed Call Mitigation', freq: 'Daily', cls: 'daily' },
-        { cat: 'Well-Led', item: 'Service User Feedback Surveys', freq: 'Monthly', cls: 'monthly' }
-    ];
+            // Update Buttons
+            document.getElementById('careBtn').className = type === 'care' ? 'btn-active' : 'btn-inactive';
+            document.getElementById('domBtn').className = type === 'dom' ? 'btn-active' : 'btn-inactive';
 
-    function showTab(type) {
-        const body = document.getElementById('tableBody');
-        const data = type === 'care' ? careData : domData;
+            body.innerHTML = data.map(row => `
+                <tr>
+                    <td><strong>${row.cat}</strong></td>
+                    <td>${row.item}</td>
+                    <td><span class="freq-tag ${row.cls}">${row.freq}</span></td>
+                </tr>
+            `).join('');
+        }
 
-        // Update Buttons
-        document.getElementById('careBtn').className = type === 'care' ? 'btn-active' : 'btn-inactive';
-        document.getElementById('domBtn').className = type === 'dom' ? 'btn-active' : 'btn-inactive';
-
-        body.innerHTML = data.map(row => `
-            <tr>
-                <td><strong>${row.cat}</strong></td>
-                <td>${row.item}</td>
-                <td><span class="freq-tag ${row.cls}">${row.freq}</span></td>
-            </tr>
-        `).join('');
-    }
-
-    // Initial Load
-    showTab('care');
-</script>
+        // Initial Load
+        showTab('care');
+    </script>
 @endsection
