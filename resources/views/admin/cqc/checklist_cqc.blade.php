@@ -1,7 +1,5 @@
 @extends('layouts.admin')
-
 @section('content')
-    <title>Nexteck | Interactive CQC Manager Portal</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root { --primary: #004a99; --secondary: #00a8e8; --success: #2e7d32; --bg: #f8fafc; }
