@@ -10,7 +10,7 @@
         body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
         .container { max-width: 1100px; margin: auto; display: grid; grid-template-columns: 1fr 2fr; gap: 20px; }
 
-        .sidebar { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); height: fit-content; position: sticky; top: 20px; }
+        .sidebars { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); height: fit-content; position: sticky; top: 20px; }
         .main-content { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 
         h2 { color: var(--primary); margin-top: 0; border-bottom: 2px solid var(--bg); padding-bottom: 10px; }
@@ -35,7 +35,7 @@
         <div id="date-display">Marian House | Live Audit Mode</div>
     </div>
 
-    <div class="sidebar">
+    <div class="sidebars">
         <div class="chart-box">
             <h3>Live Readiness Score</h3>
             <canvas id="gaugeChart" width="200" height="200"></canvas>
