@@ -1,6 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+@extends('layouts.admin')
+
+@section('content')
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexteck | CQC Readiness Dashboard</title>
@@ -21,8 +22,7 @@
         .big-stat { font-size: 3rem; font-weight: 800; color: var(--primary); margin: 10px 0; }
         .footer-info { text-align: center; margin-top: 30px; color: #888; font-size: 0.85em; }
     </style>
-</head>
-<body>
+
 
 <div class="dashboard-container">
     <header>
@@ -119,6 +119,4 @@
         }
     });
 </script>
-
-</body>
-</html>
+@endsection
