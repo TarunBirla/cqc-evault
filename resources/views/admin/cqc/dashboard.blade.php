@@ -1,124 +1,124 @@
-@extends('layouts.admin')
-
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexteck | Interactive CQC Manager Portal</title>
+    <title>Nexteck | CQC Readiness Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        :root { --primary: #004a99; --secondary: #00a8e8; --success: #2e7d32; --bg: #f8fafc; }
+        :root { --primary: #004a99; --secondary: #00a8e8; --success: #2e7d32; --warning: #ffa000; --bg: #f0f2f5; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
-        .container { max-width: 1100px; margin: auto; display: grid; grid-template-columns: 1fr 2fr; gap: 20px; }
+        .dashboard-container { max-width: 1200px; margin: auto; }
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .brand-logo { font-size: 24px; font-weight: 800; color: var(--primary); }
+        .status-badge { background: #e8f5e9; color: var(--success); padding: 8px 16px; border-radius: 20px; font-weight: bold; font-size: 0.9em; border: 1px solid var(--success); }
 
-        .sidebars { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); height: fit-content; position: sticky; top: 20px; }
-        .main-content { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 20px; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; }
+        .card h3 { margin-top: 0; color: #666; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        h2 { color: var(--primary); margin-top: 0; border-bottom: 2px solid var(--bg); padding-bottom: 10px; }
-
-        /* Checklist Styling */
-        .check-item { display: flex; align-items: center; justify-content: space-between; padding: 12px; border-bottom: 1px solid #eee; transition: 0.2s; }
-        .check-item:hover { background: #f1f5f9; }
-        .check-item input[type="checkbox"] { transform: scale(1.5); cursor: pointer; accent-color: var(--success); }
-        .label-text { flex-grow: 1; margin-left: 15px; font-weight: 500; }
-        .freq-badge { font-size: 0.75em; padding: 3px 8px; border-radius: 4px; background: #e2e8f0; color: #475569; }
-
-        /* Chart Area */
-        .chart-box { text-align: center; margin-bottom: 20px; }
-        .score-text { font-size: 2.5rem; font-weight: 800; color: var(--primary); margin: 0; }
-
-        .header-bar { grid-column: span 2; background: var(--primary); color: white; padding: 15px 25px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .chart-container { position: relative; height: 250px; width: 100%; display: flex; justify-content: center; }
+        .big-stat { font-size: 3rem; font-weight: 800; color: var(--primary); margin: 10px 0; }
+        .footer-info { text-align: center; margin-top: 30px; color: #888; font-size: 0.85em; }
     </style>
+</head>
+<body>
 
-<div class="container">
-    <div class="header-bar">
-        <div style="font-size: 1.5rem; font-weight: bold;">NEXTECK <span style="font-weight: 200;">CQC COMMAND</span></div>
-        <div id="date-display">Marian House | Live Audit Mode</div>
-    </div>
+<div class="dashboard-container">
+    <header>
+        <div class="brand-logo">NEXTECK <span style="font-weight: 300; color: var(--secondary);">Digital Care</span></div>
+        <div class="status-badge">● CQC AUDIT READY</div>
+    </header>
 
-    <div class="sidebars">
-        <div class="chart-box">
-            <h3>Live Readiness Score</h3>
-            <canvas id="gaugeChart" width="200" height="200"></canvas>
-            <p class="score-text" id="scoreVal">0%</p>
-            <p id="statusMsg" style="color: #666; font-weight: bold;">Action Required</p>
-        </div>
-        <hr>
-        <div style="font-size: 0.9em; color: #555;">
-            <p><strong>Manager:</strong> Linda</p>
-            <p><strong>Last Sync:</strong> Just now</p>
-        </div>
-    </div>
-
-    <div class="main-content">
-        <h2>Weekly Compliance Checklist</h2>
-        <div id="checklist">
+    <div class="grid">
+        <div class="card">
+            <h3>Overall CQC Readiness</h3>
+            <div class="chart-container">
+                <canvas id="readinessChart"></canvas>
             </div>
-        <div style="margin-top: 20px; padding: 15px; background: #e8f5e9; border-radius: 8px; border-left: 5px solid var(--success);">
-            <strong>CEO Note:</strong> Every checkmark updates your Evidence Vault with a timestamp and digital signature for CQC inspectors.
+            <p style="font-weight: bold; color: var(--success);">94% Compliance Score</p>
         </div>
+
+        <div class="card">
+            <h3>5 Key Question Performance</h3>
+            <div class="chart-container">
+                <canvas id="kloChart"></canvas>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Staff Training Status</h3>
+            <div class="chart-container">
+                <canvas id="staffChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="card" style="grid-column: span 1;">
+            <h3>Days Since Last Incident</h3>
+            <div class="big-stat">128</div>
+            <p style="color: #666;">Target: > 90 Days</p>
+        </div>
+        <div class="card" style="grid-column: span 2; text-align: left;">
+            <h3>Live Compliance Alerts</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 10px 0; border-bottom: 1px solid #eee;">⚠️ Fire Safety Audit due in <strong>4 days</strong></li>
+                <li style="padding: 10px 0; border-bottom: 1px solid #eee;">✅ 42/42 Care Plans Reviewed this month</li>
+                <li style="padding: 10px 0;">✅ 100% MAR Chart Completion (Last 24hrs)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-info">
+        Nexteck.uk | Management System for Marian House | Private & Confidential
     </div>
 </div>
 
 <script>
-    const tasks = [
-        { name: "MAR Charts Audited", freq: "Daily" },
-        { name: "Fire Safety Walkthrough", freq: "Weekly" },
-        { name: "Staff Supervision Logs Updated", freq: "Weekly" },
-        { name: "Infection Control Spot Check", freq: "Daily" },
-        { name: "Resident Care Plan Review", freq: "Monthly" },
-        { name: "Agency Staff Induction Completed", freq: "Daily" },
-        { name: "Food Hygiene & Temp Logs", freq: "Daily" },
-        { name: "Emergency On-Call Rota Verified", freq: "Weekly" }
-    ];
+    // Readiness Gauge (Pie/Doughnut)
+    new Chart(document.getElementById('readinessChart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Ready', 'Pending'],
+            datasets: [{
+                data: [94, 6],
+                backgroundColor: ['#2e7d32', '#e0e0e0'],
+                borderWidth: 0
+            }]
+        },
+        options: { cutout: '80%', plugins: { legend: { display: false } } }
+    });
 
-    let completedCount = 0;
-    let gaugeChart;
+    // KLOE Performance (Bar Chart)
+    new Chart(document.getElementById('kloChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Safe', 'Effective', 'Caring', 'Resp.', 'Well-Led'],
+            datasets: [{
+                label: 'Score %',
+                data: [98, 92, 100, 88, 95],
+                backgroundColor: '#004a99'
+            }]
+        },
+        options: {
+            scales: { y: { beginAtZero: true, max: 100 } },
+            plugins: { legend: { display: false } }
+        }
+    });
 
-    function init() {
-        // Render Checklist
-        const listDiv = document.getElementById('checklist');
-        listDiv.innerHTML = tasks.map((task, index) => `
-            <div class="check-item">
-                <input type="checkbox" onchange="updateScore(this)">
-                <span class="label-text">${task.name}</span>
-                <span class="freq-badge">${task.freq}</span>
-            </div>
-        `).join('');
-
-        // Initialize Gauge
-        const ctx = document.getElementById('gaugeChart').getContext('2d');
-        gaugeChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                datasets: [{
-                    data: [0, 100],
-                    backgroundColor: ['#2e7d32', '#f1f5f9'],
-                    borderWidth: 0
-                }]
-            },
-            options: { cutout: '85%', plugins: { legend: { display: false } } }
-        });
-    }
-
-    function updateScore(checkbox) {
-        if (checkbox.checked) completedCount++;
-        else completedCount--;
-
-        const percentage = Math.round((completedCount / tasks.length) * 100);
-
-        // Update Chart
-        gaugeChart.data.datasets[0].data = [percentage, 100 - percentage];
-        gaugeChart.update();
-
-        // Update Text
-        document.getElementById('scoreVal').innerText = percentage + "%";
-
-        const msg = document.getElementById('statusMsg');
-        if(percentage < 50) { msg.innerText = "Action Required"; msg.style.color = "#c62828"; }
-        else if(percentage < 90) { msg.innerText = "Improving"; msg.style.color = "#ffa000"; }
-        else { msg.innerText = "Audit Ready"; msg.style.color = "#2e7d32"; }
-    }
-
-    window.onload = init;
+    // Staff Training (Pie Chart)
+    new Chart(document.getElementById('staffChart'), {
+        type: 'pie',
+        data: {
+            labels: ['Up to Date', 'Due Soon', 'Overdue'],
+            datasets: [{
+                data: [85, 12, 3],
+                backgroundColor: ['#2e7d32', '#ffa000', '#c62828']
+            }]
+        }
+    });
 </script>
-@endsection
+
+</body>
+</html>
