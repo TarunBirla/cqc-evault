@@ -43,12 +43,14 @@ class CqcVaultController extends Controller
     public function index()
     {
         $folders = Folder::whereNull('parent_id')->where('status','0')->get();
+        
         return view('admin.cqc.index', compact('folders'));
     }
 
     public function viewFolder($id)
     {
         $folder = Folder::with(['children','documents'])->where('status','0')->findOrFail($id);
+        // dd($folder);    
         return view('admin.cqc.folder',compact('folder'));
     }
 

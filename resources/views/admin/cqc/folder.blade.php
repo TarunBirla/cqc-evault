@@ -32,6 +32,7 @@
                         @if($folder->children->count() > 0)
                         <ul class="list-group list-group-flush">
                             @foreach($folder->children as $child)
+                            @if($child->status == 0)
                             <li class="list-group-item d-flex justify-content-between align-items-center hover-item">
                                 <a href="{{ url('cqc-vault/folder/'.$child->id) }}" class="text-decoration-none text-dark flex-grow-1">
                                     <i class="bi bi-folder-fill text-warning me-2"></i>
@@ -46,6 +47,7 @@
                                     </button>
                                 </form>
                             </li>
+                            @endif
                             @endforeach
                         </ul>
                         @endif
